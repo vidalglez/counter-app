@@ -25,14 +25,11 @@ const listOfTodos = [
     completed: false
   }
 ];
-/*
-const pList = document.querySelectorAll('p');
-pList.forEach(function(pItem) {
-  if (pItem.textContent.toLowerCase().includes('the')) {
-    pItem.remove();
-  }
-});
-*/
+
+const filterTodo = {
+  filterText: ''
+};
+
 const todosLeft = listOfTodos.filter(function(todo) {
   return !todo.completed;
 });
@@ -41,20 +38,31 @@ const pCompleted = document.createElement('h3');
 pCompleted.textContent = `You have ${todosLeft.length} todos left`;
 document.querySelector('body').appendChild(pCompleted);
 
-listOfTodos.forEach(function(todo) {
-  const pTodo = document.createElement('p');
-  document.querySelector('body').appendChild(pTodo);
-  pTodo.textContent = todo.title;
-});
+const displayTodos = function(listOfTodos, filterTodo) {
+  const filterList = listOfTodos.filter(function(todo) {
+    return todo.title.toLowerCase().includes(filterTodo.filterText.toLowerCase())
+  });
+
+  document.querySelector("#todos").innerHTML = ''
+
+  filterList.forEach(function(todo) {
+    const pTodo = document.createElement('p');
+    document.querySelector('#todos').appendChild(pTodo);
+    pTodo.textContent = todo.title;
+  });
+};
+
+displayTodos(listOfTodos, filterTodo)
 
 document.querySelector('#add-todo').addEventListener('click', function(e) {
   e.target.textContent = 'A new message';
 });
 
-document.querySelector('#remove-all').addEventListener('click', function(e){
-    console.log('Remove all clicked')
-})
+document.querySelector('#remove-all').addEventListener('click', function(e) {
+  console.log('Remove all clicked');
+});
 
-document.querySelector('#new-todo-text').addEventListener('input', function(e){
-    console.log(e.target.value)
-})
+document.querySelector('#new-todo-text').addEventListener('input', function(e) {
+  filterTodo.filterText = e.target.value
+  displayTodos(listOfTodos, filterTodo)
+});
