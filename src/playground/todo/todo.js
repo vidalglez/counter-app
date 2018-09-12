@@ -1,49 +1,47 @@
 const listOfTodos = [
   {
     title: 'My next trip',
-    body: 'I would like to go Germany',
     completed: true
   },
   {
     title: 'Habbits to work on',
-    body: 'Get some diet',
     completed: false
   },
   {
     title: 'Office modification',
-    body: 'New Seat!',
     completed: false
   },
   {
     title: 'Study Javascript',
-    body: 'Buy a book',
     completed: true
   },
   {
-    title: 'Get Certification',
-    body: 'Pay exam',
+    title: 'Get Java Certification',
     completed: false
   }
 ];
 
 const filterTodo = {
-  filterText: ''
+  filterText: '',
+  hideCompleted: false
 };
 
-const todosLeft = listOfTodos.filter(function(todo) {
-  return !todo.completed;
-});
-
-const pCompleted = document.createElement('h3');
-pCompleted.textContent = `You have ${todosLeft.length} todos left`;
-document.querySelector('body').appendChild(pCompleted);
-
 const displayTodos = function(listOfTodos, filterTodo) {
-  const filterList = listOfTodos.filter(function(todo) {
-    return todo.title.toLowerCase().includes(filterTodo.filterText.toLowerCase())
+  const filterList = listOfTodos.filter(function(todo) {     
+      const todoMatch = todo.title.toLowerCase().includes(filterTodo.filterText.toLowerCase()); 
+      const hideMatch = !filterTodo.hideCompleted || !todo.completed;
+    return todoMatch && hideMatch
   });
 
-  document.querySelector("#todos").innerHTML = ''
+  const todosLeft = filterList.filter(function(todo) {
+    return !todo.completed;
+  });
+
+  document.querySelector('#todos').innerHTML = '';
+
+  const pCompleted = document.createElement('h3');
+  pCompleted.textContent = `You have ${todosLeft.length} todos left`;
+  document.querySelector('#todos').appendChild(pCompleted);
 
   filterList.forEach(function(todo) {
     const pTodo = document.createElement('p');
@@ -52,17 +50,31 @@ const displayTodos = function(listOfTodos, filterTodo) {
   });
 };
 
-displayTodos(listOfTodos, filterTodo)
+displayTodos(listOfTodos, filterTodo);
 
-document.querySelector('#add-todo').addEventListener('click', function(e) {
-  e.target.textContent = 'A new message';
-});
+document
+  .querySelector('#add-todo-form')
+  .addEventListener('submit', function(e) {
+    e.preventDefault();
+    listOfTodos.push({
+      title: e.target.elements.addTodoText.value,
+      completed: false
+    });
+    filterTodo.text = '';
+    e.target.elements.addTodoText.value = '';
+    displayTodos(listOfTodos, filterTodo);
+  });
 
-document.querySelector('#remove-all').addEventListener('click', function(e) {
-  console.log('Remove all clicked');
-});
+document
+  .querySelector('#filter-todo-text')
+  .addEventListener('input', function(e) {
+    filterTodo.filterText = e.target.value;
+    displayTodos(listOfTodos, filterTodo);
+  });
 
-document.querySelector('#new-todo-text').addEventListener('input', function(e) {
-  filterTodo.filterText = e.target.value
-  displayTodos(listOfTodos, filterTodo)
-});
+document
+  .querySelector('#chk-hide-compl')
+  .addEventListener('change', function(e) {
+    filterTodo.hideCompleted = e.target.checked;
+    displayTodos(listOfTodos, filterTodo);
+  });
