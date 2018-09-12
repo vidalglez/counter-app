@@ -25,25 +25,25 @@ const renderTodos = function(listOfTodos, filterTodo) {
       return !todo.completed;
     });
   
-    const pCompleted = generateSummaryDOM(todosLeft)
-    document.querySelector('#todos').appendChild(pCompleted);
-  
+    document.querySelector('#todos').innerHTML = '';
+
+    document.querySelector('#todos').appendChild(generateSummaryDOM(todosLeft));
+
     filterList.forEach(function(todo) {
-      generateTodoDOM(todo)
+        document.querySelector('#todos').appendChild(generateTodoDOM(todo));
     });
   };
 
   //Get the DOM elements for an individual note
 const generateTodoDOM = function(todo) {
-  const pTodo = document.createElement('p');
-  document.querySelector('#todos').appendChild(pTodo);
+  const pTodo = document.createElement('p');  
   pTodo.textContent = todo.title;
+  return pTodo
 };
 
 
 //Get the DOM elements for list summary
-const generateSummaryDOM = function(todosLeft) {
-  document.querySelector('#todos').innerHTML = '';
+const generateSummaryDOM = function(todosLeft) {  
   const pCompleted = document.createElement('h3');
   pCompleted.textContent = `You have ${todosLeft.length} todos left`;
   return pCompleted;

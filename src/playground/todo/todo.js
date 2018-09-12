@@ -5,10 +5,7 @@ const filterTodo = {
   hideCompleted: false
 };
 
-
 renderTodos(listOfTodos, filterTodo)
-
-//displayTodos(listOfTodos, filterTodo);
 
 document.querySelector('#add-todo-form').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -20,17 +17,15 @@ document.querySelector('#add-todo-form').addEventListener('submit', function(e) 
     e.target.elements.addTodoText.value = '';
     saveTodos(listOfTodos)
     renderTodos(listOfTodos, filterTodo)
-    //displayTodos(listOfTodos, filterTodo);
+    
   });
 
 document.querySelector('#filter-todo-text').addEventListener('input', function(e) {
     filterTodo.filterText = e.target.value;
-    renderTodos(listOfTodos, filterTodo)
-    //displayTodos(listOfTodos, filterTodo);
+    renderTodos(listOfTodos, filterTodo)    
   });
 
 document.querySelector('#chk-hide-compl').addEventListener('change', function(e) {
     filterTodo.hideCompleted = e.target.checked;
-    renderTodos(listOfTodos, filterTodo)
-    //displayTodos(listOfTodos, filterTodo);
+    renderTodos(listOfTodos, filterTodo)    
   });
