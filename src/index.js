@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import CounterForm from "./components/counter-form";
+import StudentDashboard from './components/student-dashboard'
 import configureStore from "./store/configureStore";
 
 import "./styles.css";
@@ -23,6 +24,8 @@ const App = () => (
       <h1>Counter App</h1>
       <h2>Basic React & Redux Example</h2>
       <CounterForm counter={0} />
+      <hr />
+      <StudentDashboard />
     </div>
   </Provider>
 );
