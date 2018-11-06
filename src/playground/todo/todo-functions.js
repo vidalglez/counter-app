@@ -13,6 +13,16 @@ const saveTodos = function(listOfTodos) {
   localStorage.setItem('todos', JSON.stringify(listOfTodos));
 };
 
+const removeTodo = function(id){
+    const todoIndex= listOfTodos.findIndex(function(todo){
+      return todo.id === id
+    });
+
+    if(todoIndex > -1) {
+      listOfTodos.splice(todoIndex, 1);
+    }
+}
+
 //Render applications todos based on filters
 const renderTodos = function(listOfTodos, filterTodo) {
     const filterList = listOfTodos.filter(function(todo) {     
@@ -40,6 +50,13 @@ const generateTodoDOM = function(todo) {
   const chkTodo = document.createElement('input')  
   const spanTodo = document.createElement('span')
   const btnRemoveTodo = document.createElement('button')
+
+  btnRemoveTodo.addEventListener('click', function() {
+    console.log(todo)    
+    removeTodo(todo.id)
+    saveTodos(listOfTodos)
+    renderTodos(listOfTodos, filterTodo)
+  });
 
   //Setup todo checkbox
   chkTodo.setAttribute('type','checkbox')
