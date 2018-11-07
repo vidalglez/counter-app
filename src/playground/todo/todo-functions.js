@@ -14,13 +14,33 @@ const saveTodos = function(listOfTodos) {
 };
 
 const removeTodo = function(id){
-    const todoIndex= listOfTodos.findIndex(function(todo){
+    const todoIndex = listOfTodos.findIndex(function(todo){
       return todo.id === id
     });
 
     if(todoIndex > -1) {
       listOfTodos.splice(todoIndex, 1);
     }
+}
+
+const toggleTodo = function(id) {
+  const todoIndex = listOfTodos.findIndex(function(todo){
+      return todo.id === id
+    });
+
+    if(todoIndex > -1) {
+      listOfTodos[todoIndex].completed = !listOfTodos[todoIndex].completed
+    }
+  /*
+  const todo = listOfTodos.find(function(indtodo){
+    //console.log(todo)
+    console.log(indtodo)
+    return indtodo.id === id;
+  });
+  if(todo !== undefined) {
+    todo.completed = !todo.completed;
+  }
+  */
 }
 
 //Render applications todos based on filters
@@ -60,7 +80,13 @@ const generateTodoDOM = function(todo) {
 
   //Setup todo checkbox
   chkTodo.setAttribute('type','checkbox')
+  chkTodo.checked = todo.completed  
   divTodo.appendChild(chkTodo)
+  chkTodo.addEventListener('change', function(){    
+    toggleTodo(todo.id);
+    saveTodos(listOfTodos)
+    renderTodos(listOfTodos, filterTodo)
+  });
 
   //Setup todo text
   spanTodo.textContent = todo.title;

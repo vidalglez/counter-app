@@ -10,7 +10,7 @@ renderTodos(listOfTodos, filterTodo)
 document.querySelector('#add-todo-form').addEventListener('submit', function(e) {
     e.preventDefault();
     listOfTodos.push({
-      id: uuidv4,
+      id: uuidv4(),
       title: e.target.elements.addTodoText.value,
       completed: false
     });
