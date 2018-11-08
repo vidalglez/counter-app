@@ -31,16 +31,6 @@ const toggleTodo = function(id) {
     if(todoIndex > -1) {
       listOfTodos[todoIndex].completed = !listOfTodos[todoIndex].completed
     }
-  /*
-  const todo = listOfTodos.find(function(indtodo){
-    //console.log(todo)
-    console.log(indtodo)
-    return indtodo.id === id;
-  });
-  if(todo !== undefined) {
-    todo.completed = !todo.completed;
-  }
-  */
 }
 
 //Render applications todos based on filters
@@ -68,7 +58,7 @@ const renderTodos = function(listOfTodos, filterTodo) {
 const generateTodoDOM = function(todo) {
   const divTodo = document.createElement('div')
   const chkTodo = document.createElement('input')  
-  const spanTodo = document.createElement('span')
+  const elementTodo = document.createElement('a')
   const btnRemoveTodo = document.createElement('button')
 
   btnRemoveTodo.addEventListener('click', function() {
@@ -89,8 +79,9 @@ const generateTodoDOM = function(todo) {
   });
 
   //Setup todo text
-  spanTodo.textContent = todo.title;
-  divTodo.appendChild(spanTodo);
+  elementTodo.textContent = todo.title;
+  elementTodo.setAttribute('href', '/edit-todo.html')
+  divTodo.appendChild(elementTodo);
 
   //Setup todo remove button
   btnRemoveTodo.textContent = 'X'
