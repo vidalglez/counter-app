@@ -10,8 +10,14 @@ if(todo === undefined) {
 
 const todoText = document.querySelector("#edit-todo-text")
 todoText.value = todo.title
+
+const spanLast = document.querySelector('#last-edited-todo')
+spanLast.textContent = generateLastEdited(todo.updatedAt)
+
 todoText.addEventListener('input', function(e) {
     todo.title = e.target.value
+    todo.updatedAt = moment().valueOf()
+    spanLast.textContent = generateLastEdited(todo.updatedAt)
     saveTodos(listOfTodos)
 })
 
@@ -33,5 +39,6 @@ window.addEventListener('storage', function(e) {
         }
 
         todoText.value = todo.title
+        spanLast.textContent = generateLastEdited(todo.updatedAt)
     }
 })

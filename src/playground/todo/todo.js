@@ -8,12 +8,15 @@ const filterTodo = {
 renderTodos(listOfTodos, filterTodo)
 
 document.querySelector('#add-todo-form').addEventListener('submit', function(e) {
-  let uuid = uuidv4()
+    let uuid = uuidv4()
+    const timestamp = moment().valueOf()
     e.preventDefault();
     listOfTodos.push({
       id: uuid,
       title: e.target.elements.addTodoText.value,
-      completed: false
+      completed: false,
+      createdAt: timestamp,
+      updatedAt: timestamp
     });
     filterTodo.text = '';
     e.target.elements.addTodoText.value = '';

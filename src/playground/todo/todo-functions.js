@@ -80,7 +80,7 @@ const generateTodoDOM = function(todo) {
 
   //Setup todo text
   elementTodo.textContent = todo.title;
-  elementTodo.setAttribute('href', '/edit-todo.html')
+  elementTodo.setAttribute('href', `/edit-todo.html#${todo.id}`)
   divTodo.appendChild(elementTodo);
 
   //Setup todo remove button
@@ -96,3 +96,8 @@ const generateSummaryDOM = function(todosLeft) {
   pCompleted.textContent = `You have ${todosLeft.length} todos left`;
   return pCompleted;
 };
+
+//Generate the last edited message
+const generateLastEdited = function(timestamp) {
+  return `Last edited ${moment(timestamp).fromNow()}`
+}
