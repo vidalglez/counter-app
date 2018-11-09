@@ -2,7 +2,8 @@ let listOfTodos = getSavedTodos();
 
 const filterTodo = {
   filterText: '',
-  hideCompleted: false
+  hideCompleted: false,
+  sortBy: 'byEdited'
 };
 
 renderTodos(listOfTodos, filterTodo)
@@ -29,6 +30,11 @@ document.querySelector('#filter-todo-text').addEventListener('input', function(e
     filterTodo.filterText = e.target.value;
     renderTodos(listOfTodos, filterTodo)    
   });
+
+document.querySelector('#filter-by').addEventListener('change', function(e) {  
+  filterTodo.sortBy = e.target.value
+  renderTodos(listOfTodos, filterTodo)
+})
 
 document.querySelector('#chk-hide-compl').addEventListener('change', function(e) {
     filterTodo.hideCompleted = e.target.checked;

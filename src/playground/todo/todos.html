@@ -17,6 +17,11 @@
     <label>
         <input type="checkbox" id="chk-hide-compl" name="hideCompleted" /> Hide completed
     </label>
+    <select id="filter-by">
+        <option value="byEdited">Sort by last edited</option>
+        <option value="byCreated">Sort by recently created</option>
+        <option value="alphabetical">Sort alphabetically</option>
+    </select>
     <div id="todos"></div>
     <form id="add-todo-form">
         <input id="new-todo-text" type="text" placeholder="Enter something todo" name="addTodoText" />

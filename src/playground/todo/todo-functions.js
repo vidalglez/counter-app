@@ -33,8 +33,44 @@ const toggleTodo = function(id) {
     }
 }
 
+const sortTodos = function(todos, sortBy) {
+  if (sortBy === 'byEdited'){
+    return todos.sort(function(a, b){
+      if(a.updatedAt > b.updatedAt) {
+        return -1
+      } else if (a.updatedAt < b.updatedAt) {
+        return 1
+      } else {
+        return 0
+      }
+    })
+  } else if (sortBy === 'byCreated') {
+    return todos.sort(function(a, b){
+      if (a.createdAt > b.createdAt) {
+        return -1
+      } else if (a.createdAt < b.createdAt) {
+        return 1
+      } else {
+        return 0
+      }
+    })    
+  } else if(sortBy === 'alphabetical'){
+      return todos.sort(function(a, b){
+        if(a.title.toLowerCase() < b.title.toLowerCase) {
+          return -1
+        } else if(a.title > b.title){
+          return 1
+        } else {
+          return 0
+        }
+      })
+    }
+  return todos
+}
+
 //Render applications todos based on filters
 const renderTodos = function(listOfTodos, filterTodo) {
+    listOfTodos = sortTodos(listOfTodos, filterTodo.sortBy)
     const filterList = listOfTodos.filter(function(todo) {     
         const todoMatch = todo.title.toLowerCase().includes(filterTodo.filterText.toLowerCase()); 
         const hideMatch = !filterTodo.hideCompleted || !todo.completed;
@@ -79,7 +115,11 @@ const generateTodoDOM = function(todo) {
   });
 
   //Setup todo text
-  elementTodo.textContent = todo.title;
+  if(todo.title !== undefined) { 
+    elementTodo.textContent = todo.title;
+  } else {
+    elementTodo.textContent = 'Unnamed todo';
+  }
   elementTodo.setAttribute('href', `/edit-todo.html#${todo.id}`)
   divTodo.appendChild(elementTodo);
 
