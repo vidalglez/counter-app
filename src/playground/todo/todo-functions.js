@@ -1,5 +1,5 @@
 //Fetch existing todos from localStorage
-const getSavedTodos = function() {
+const getSavedTodos = () => {
   const todosJSON = localStorage.getItem('todos');
   if (todosJSON !== null) {
     return JSON.parse(todosJSON);
@@ -9,33 +9,29 @@ const getSavedTodos = function() {
 };
 
 //Saves todos to localStorage
-const saveTodos = function(listOfTodos) {
+const saveTodos = (listOfTodos) => {
   localStorage.setItem('todos', JSON.stringify(listOfTodos));
 };
 
-const removeTodo = function(id){
-    const todoIndex = listOfTodos.findIndex(function(todo){
-      return todo.id === id
-    });
+const removeTodo = (id) => {
+    const todoIndex = listOfTodos.findIndex((todo) => todo.id === id);
 
     if(todoIndex > -1) {
       listOfTodos.splice(todoIndex, 1);
     }
 }
 
-const toggleTodo = function(id) {
-  const todoIndex = listOfTodos.findIndex(function(todo){
-      return todo.id === id
-    });
+const toggleTodo = (id) => {
+  const todoIndex = listOfTodos.findIndex((todo) => todo.id === id);
 
     if(todoIndex > -1) {
       listOfTodos[todoIndex].completed = !listOfTodos[todoIndex].completed
     }
 }
 
-const sortTodos = function(todos, sortBy) {
+const sortTodos = (todos, sortBy) => {
   if (sortBy === 'byEdited'){
-    return todos.sort(function(a, b){
+    return todos.sort((a, b) => {
       if(a.updatedAt > b.updatedAt) {
         return -1
       } else if (a.updatedAt < b.updatedAt) {
@@ -45,7 +41,7 @@ const sortTodos = function(todos, sortBy) {
       }
     })
   } else if (sortBy === 'byCreated') {
-    return todos.sort(function(a, b){
+    return todos.sort((a, b) => {
       if (a.createdAt > b.createdAt) {
         return -1
       } else if (a.createdAt < b.createdAt) {
@@ -55,7 +51,7 @@ const sortTodos = function(todos, sortBy) {
       }
     })    
   } else if(sortBy === 'alphabetical'){
-      return todos.sort(function(a, b){
+      return todos.sort((a, b) => {
         if(a.title.toLowerCase() < b.title.toLowerCase) {
           return -1
         } else if(a.title > b.title){
@@ -69,35 +65,33 @@ const sortTodos = function(todos, sortBy) {
 }
 
 //Render applications todos based on filters
-const renderTodos = function(listOfTodos, filterTodo) {
+const renderTodos = (listOfTodos, filterTodo) => {
     listOfTodos = sortTodos(listOfTodos, filterTodo.sortBy)
-    const filterList = listOfTodos.filter(function(todo) {     
+    const filterList = listOfTodos.filter((todo) => {     
         const todoMatch = todo.title.toLowerCase().includes(filterTodo.filterText.toLowerCase()); 
         const hideMatch = !filterTodo.hideCompleted || !todo.completed;
       return todoMatch && hideMatch
     });
   
-    const todosLeft = filterList.filter(function(todo) {
-      return !todo.completed;
-    });
+    const todosLeft = filterList.filter((todo) =>  !todo.completed);
   
     document.querySelector('#todos').innerHTML = '';
 
     document.querySelector('#todos').appendChild(generateSummaryDOM(todosLeft));
 
-    filterList.forEach(function(todo) {
+    filterList.forEach((todo) => {
         document.querySelector('#todos').appendChild(generateTodoDOM(todo));
     });
   };
 
   //Get the DOM elements for an individual note
-const generateTodoDOM = function(todo) {
+const generateTodoDOM = (todo) => {
   const divTodo = document.createElement('div')
   const chkTodo = document.createElement('input')  
   const elementTodo = document.createElement('a')
   const btnRemoveTodo = document.createElement('button')
 
-  btnRemoveTodo.addEventListener('click', function() {
+  btnRemoveTodo.addEventListener('click', () => {
     console.log(todo)    
     removeTodo(todo.id)
     saveTodos(listOfTodos)
@@ -108,7 +102,7 @@ const generateTodoDOM = function(todo) {
   chkTodo.setAttribute('type','checkbox')
   chkTodo.checked = todo.completed  
   divTodo.appendChild(chkTodo)
-  chkTodo.addEventListener('change', function(){    
+  chkTodo.addEventListener('change', () => {    
     toggleTodo(todo.id);
     saveTodos(listOfTodos)
     renderTodos(listOfTodos, filterTodo)
@@ -131,13 +125,13 @@ const generateTodoDOM = function(todo) {
 
 
 //Get the DOM elements for list summary
-const generateSummaryDOM = function(todosLeft) {  
+const generateSummaryDOM = (todosLeft) => {  
   const pCompleted = document.createElement('h3');
   pCompleted.textContent = `You have ${todosLeft.length} todos left`;
   return pCompleted;
 };
 
 //Generate the last edited message
-const generateLastEdited = function(timestamp) {
+const generateLastEdited = (timestamp) => {
   return `Last edited ${moment(timestamp).fromNow()}`
 }
