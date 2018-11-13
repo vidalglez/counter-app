@@ -4,7 +4,7 @@ let todo = listOfTodos.find(function(todo){
     return todo.id === todoId
 });
 
-if(todo === undefined) {    
+if(!todo) {    
     location.assign('todos.html')
 }
 
@@ -34,7 +34,7 @@ window.addEventListener('storage', (e) => {
             return todo.id === todoId
         });
 
-        if(todo === undefined) {    
+        if(!todo) {    
             location.assign('todos.html')
         }
 

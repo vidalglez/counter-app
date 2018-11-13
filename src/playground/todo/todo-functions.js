@@ -2,7 +2,7 @@
 const getSavedTodos = () => {
   const todosJSON = localStorage.getItem('todos');
 
-  return todosJSON !== null ? JSON.parse(todosJSON) : []
+  return todosJSON ? JSON.parse(todosJSON) : []
 };
 
 //Saves todos to localStorage
@@ -88,8 +88,7 @@ const generateTodoDOM = (todo) => {
   const elementTodo = document.createElement('a')
   const btnRemoveTodo = document.createElement('button')
 
-  btnRemoveTodo.addEventListener('click', () => {
-    console.log(todo)    
+  btnRemoveTodo.addEventListener('click', () => { 
     removeTodo(todo.id)
     saveTodos(listOfTodos)
     renderTodos(listOfTodos, filterTodo)
@@ -106,7 +105,7 @@ const generateTodoDOM = (todo) => {
   });
 
   //Setup todo text
-  if(todo.title !== undefined) { 
+  if(todo.title) { 
     elementTodo.textContent = todo.title;
   } else {
     elementTodo.textContent = 'Unnamed todo';
