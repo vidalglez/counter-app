@@ -29,3 +29,31 @@ person.setName('David Gilmour')
 
 console.log(person.getBio())
 console.log(person2.getBio())
+
+
+//HANGMAN
+
+const Hangman = function(word, remainingGuesses){
+    this.word = word.toLowerCase().split('')
+    this.guessedLetters = ['c']
+    this.remainingGuesses = remainingGuesses
+}
+
+Hangman.prototype.getPuzzle = function(){
+    let guessWord = ''
+    
+    this.word.forEach((letter) => {
+        if(this.guessedLetters.includes(letter)){
+            guessWord += letter
+        } else {
+            guessWord += '*'
+        }
+    })
+    return guessWord
+}
+
+const h1 = new Hangman('Car', 2)
+const h2 = new Hangman('Silao', 3)
+
+console.log(h1.getPuzzle())
+console.log(h2.getPuzzle())
