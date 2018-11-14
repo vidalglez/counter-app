@@ -1,3 +1,4 @@
+'use-strict'
 let listOfTodos = getSavedTodos();
 
 const filterTodo = {

@@ -1,3 +1,4 @@
+'use strict'
 const todoId = location.hash.substring(1)
 let listOfTodos = getSavedTodos()
 let todo = listOfTodos.find(function(todo){
