@@ -5,6 +5,7 @@ const Hangman = function(word, remainingGuesses){
     this.word = word.toLowerCase().split('')
     this.guessedLetters = []
     this.remainingGuesses = remainingGuesses
+    this.status = 'playing'
 }
 
 Hangman.prototype.getPuzzle = function(){
@@ -36,16 +37,17 @@ Hangman.prototype.makeGuess = function(guessChar) {
             this.guessedLetters.push(guessChar)
         }
     }    
-    return `Remaining guesses ${this.remainingGuesses}`
+    this.updateStatus()    
+    //return `Remaining guesses ${this.remainingGuesses}`
 }
 
-const h1 = new Hangman('Cat', 2)
-const h2 = new Hangman('New Jersey', 4)
-
-console.log(h1.makeGuess('c'))
-console.log(h1.makeGuess('s'))
-console.log(h1.makeGuess('t'))
-console.log(h1.getPuzzle())
-
-console.log(h2.makeGuess('w'))
-console.log(h2.getPuzzle())
+Hangman.prototype.updateStatus = function() {
+    if(this.remainingGuesses === 0){
+        this.status = 'failed'
+    } else if(!this.getPuzzle().includes('*') && this.remainingGuesses > 0){
+        this.status = 'finished'
+    } /*else {
+        this.status = 'playing'
+    }
+    */
+}
