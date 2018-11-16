@@ -8,8 +8,7 @@ window.addEventListener('keypress', e => {
   h1.makeGuess(guess);
   console.log(h1.getPuzzle());
   document.querySelector('#puzzle').textContent = h1.getPuzzle();
-  console.log(h1.remainingGuesses);
-  //document.querySelector('#remainingGuess').textContent = `Remaining guesses ${h1.remainingGuesses}`;
+  console.log(h1.remainingGuesses);  
   document.querySelector("#status").textContent = h1.getMessage()
   console.log(h1.status);
 });
@@ -21,4 +20,3 @@ const spanElement = () => {
 };
 
 document.querySelector('#puzzle').textContent = h1.getPuzzle();
-//document.querySelector('#remainingGuess').textContent = `Remaining guesses ${h1.remainingGuesses}`;
