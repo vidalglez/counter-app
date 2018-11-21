@@ -9,17 +9,17 @@ class Hangman {
     this.status = 'playing';
   }
 
-  getPuzzle() {
-    let guessWord = '';
+  get puzzle() {
+    let puzzle = '';
 
     this.word.forEach(letter => {
       if (this.guessedLetters.includes(letter) || letter === ' ') {
-        guessWord += letter;
+        puzzle += letter;
       } else {
-        guessWord += '*';
+        puzzle += '*';
       }
     });
-    return guessWord;
+    return puzzle;
   }
 
   makeGuess(guessChar) {
@@ -45,7 +45,7 @@ class Hangman {
   updateStatus() {
     if (this.remainingGuesses === 0) {
       this.status = 'failed';
-    } else if (!this.getPuzzle().includes('*') && this.remainingGuesses > 0) {
+    } else if (!this.puzzle.includes('*') && this.remainingGuesses > 0) {
       this.status = 'finished';
     } else {
       this.status = 'playing';
