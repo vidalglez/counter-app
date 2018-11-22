@@ -30,3 +30,19 @@ request.addEventListener('readystatechange', (e) => {
 
 request.open('GET', 'http://puzzle.mead.io/puzzle?wordCount=2')
 request.send()
+
+const countryCode = 'MX'
+
+const request2 = new XMLHttpRequest()
+request2.addEventListener('readystatechange', (e) => {
+    if(e.target.readyState === 4 && e.target.status === 200){
+        const data = JSON.parse(e.target.responseText)
+        const country = data.find((findCountry) => {
+            return findCountry.alpha2Code ===  countryCode
+        })
+        console.log(country.name)
+    }
+})
+
+request2.open('GET', 'https://restcountries.eu/rest/v2/all')
+request2.send()
