@@ -15,12 +15,15 @@ getDataCallback((response, error) => {
 })
 
 //Promise
-const myPromise = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve('Soem test data handled in promise')
-    //reject('There was some kind fo error handled in promise')
-  }, 3000)
-})
+const getDatapromise = data =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(`Some test data handled in promise ${data}`)
+      //reject('There was some kind fo error handled in promise')
+    }, 3000)
+  })
+
+const myPromise = getDatapromise(456)
 
 myPromise.then(
   data => {
