@@ -52,7 +52,7 @@ class Hangman {
     }
   }
 
-  getMessage() {
+  get statusMessage() {
     if (this.status === 'playing') {
       return `Guess left ${this.remainingGuesses}`;
     } else if (this.status === 'failed') {
