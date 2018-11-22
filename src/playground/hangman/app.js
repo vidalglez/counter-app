@@ -16,6 +16,14 @@ const spanElement = () => {
 
 document.querySelector('#puzzle').textContent = h1.puzzle;
 
+getPuzzle((error, response) => {
+    if(error){
+        console.log(error)
+    } else {
+        console.log(response)
+    }
+})
+/*
 const request = new XMLHttpRequest()
 
 request.addEventListener('readystatechange', (e) => {
@@ -46,3 +54,4 @@ request2.addEventListener('readystatechange', (e) => {
 
 request2.open('GET', 'https://restcountries.eu/rest/v2/all')
 request2.send()
+*/
