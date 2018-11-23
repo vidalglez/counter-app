@@ -34,3 +34,9 @@ const getCountry = countryCode => {
     request.send()
   })
 }
+
+getPuzzle(2).then(data => {
+    console.log(`The word is ${data}`)
+}, (err) => {
+    console.log(err)
+})

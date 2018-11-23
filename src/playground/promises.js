@@ -15,15 +15,13 @@ getDataCallback((response, error) => {
 })
 
 //Promise
-const getDatapromise = data =>
-  new Promise((resolve, reject) => {
+const getDataPromise = num => new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(`Some test data handled in promise ${data}`)
-      //reject('There was some kind fo error handled in promise')
+      typeof num === 'number' ? resolve(num * 2) : reject('There was some kind fo error handled in promise')
     }, 3000)
   })
-
-const myPromise = getDatapromise(456)
+/*
+const myPromise = getDataPromise(456)
 
 myPromise.then(
   data => {
@@ -33,3 +31,13 @@ myPromise.then(
     console.log(e)
   }
 )
+*/
+getDataPromise(2).then(data => {
+  return getDataPromise(data)
+}).then(data => {
+  return getDataPromise(data)
+}).then(data => {
+  console.log(data)
+}).catch((err) => {
+  console.log(`Error: ${err}`)
+})
