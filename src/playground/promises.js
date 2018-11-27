@@ -32,10 +32,12 @@ myPromise.then(
   }
 )
 */
+
 getDataPromise(2).then(data => {
   return getDataPromise(data)
 }).then(data => {
-  return getDataPromise(data)
+  //return getDataPromise(data)
+  return 'This is a test message'
 }).then(data => {
   console.log(data)
 }).catch((err) => {
