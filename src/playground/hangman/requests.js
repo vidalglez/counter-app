@@ -25,10 +25,14 @@ const getCountry = countryCode => {
     })
 }
 
-getCountry('MX').then(country => {
-    console.log(`The country name is: ${country}`)
-}).catch(err => {
-    console.log(err)
+const getLocation = () => fetch('https://ipinfo.io/json?token=1a11bd55cc8f9c').then(response => {
+    if(response.status === 200) {
+        return response.json()
+    } else {
+        throw new Error('Unable to fetch current location')
+    }
+}).then((data) => {
+    return data
 })
 
 getPuzzle(2).then(puzzle => {
@@ -48,3 +52,21 @@ fetch('https://puzzle.mead.io/puzzle', {}).then(response => {
 }).catch(err => {
     console.log(err)
 })
+
+getCountry('MX').then(country => {
+    console.log(`The country name is: ${country}`)
+}).catch(err => {
+    console.log(err)
+})
+
+getLocation().then(location => {
+    console.log(`Your location is location ${location.city}, ${location.region}, ${location.country}`)
+}).catch((err) => {
+    console.log(err)
+})
+
+getLocation().then(location => {
+    return getCountry(location.country)
+}).then( country => {
+    console.log(`The country name through chained fetch is: ${country}`)
+}).catch(err => console.log(err))
