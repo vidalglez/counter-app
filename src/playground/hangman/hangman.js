@@ -56,7 +56,7 @@ class Hangman {
     if (this.status === 'playing') {
       return `Guess left ${this.remainingGuesses}`;
     } else if (this.status === 'failed') {
-      return `Nice try! The word was ${this.word.join('')}`;
+      return `Nice try! The word was "${this.word.join('')}"`;
     } else if (this.status === 'finished') {
       return `Great work! You guessed the word`;
     }
