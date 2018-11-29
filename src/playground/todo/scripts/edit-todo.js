@@ -6,7 +6,7 @@ let todo = listOfTodos.find(function(todo){
 });
 
 if(!todo) {    
-    location.assign('todos.html')
+    location.assign('index.html')
 }
 
 const todoText = document.querySelector("#edit-todo-text")
@@ -25,7 +25,7 @@ todoText.addEventListener('input', (e) => {
 document.querySelector("#btn-remove-todo").addEventListener('click', (e) => {
     removeTodo(todoId)
     saveTodos(listOfTodos)
-    location.assign('todos.html')
+    location.assign('index.html')
 })
 
 window.addEventListener('storage', (e) => {
@@ -36,7 +36,7 @@ window.addEventListener('storage', (e) => {
         });
 
         if(!todo) {    
-            location.assign('todos.html')
+            location.assign('index.html')
         }
 
         todoText.value = todo.title

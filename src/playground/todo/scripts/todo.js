@@ -10,13 +10,19 @@ const filterTodo = {
 renderTodos(listOfTodos, filterTodo)
 
 document.querySelector('#add-todo-form').addEventListener('submit', (e) => {
-  let uuid = uuidv4()
-  const timestamp = moment().valueOf()
-  const title = e.target.elements.addTodoText.value.lenght > 0 ? e.target.elements.addTodoText.value : 'Unnamed todo'
   e.preventDefault();
+  if(!e.target.elements.addTodoText.value.trim())
+    return
+
+  let uuid = uuidv4()
+  const timestamp = moment().valueOf()  
+  //const title = e.target.elements.addTodoText.value.length > 0 ? e.target.elements.addTodoText.value : 'Unnamed todo'
+  
+  const title = e.target.elements.addTodoText.value
+  
   listOfTodos.push({
     id: uuid,
-    title: title,
+    title,
     completed: false,
     createdAt: timestamp,
     updatedAt: timestamp
@@ -24,8 +30,8 @@ document.querySelector('#add-todo-form').addEventListener('submit', (e) => {
   filterTodo.text = '';
   e.target.elements.addTodoText.value = '';
   saveTodos(listOfTodos)
-  //renderTodos(listOfTodos, filterTodo)
-  location.assign(`/edit-todo.html#${uuid}`)
+  renderTodos(listOfTodos, filterTodo)
+  //location.assign(`/edit-todo.html#${uuid}`)
 });
 
 document.querySelector('#filter-todo-text').addEventListener('input', (e) => {

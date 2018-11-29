@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <title>Todo app</title>
 
-<head>
-    <style>
-        body {
-            font-family: Arial;
-            font-size: 12px;
-        }
-    </style>
-</head>
-<title>Todo app</title>
-
-<body>
-    <h3>Edit Todo</h3>
-    <input type="text" id="edit-todo-text" />
-    <span id="last-edited-todo"></span>
-    <button id="btn-remove-todo">Remove</button>
-    <a href="todos.html">Home Todo List</a>
-</body>
-<script src="moment-with-locales.min.js"></script>
-<script src="todo-functions.js" ></script>
-<script src="edit-todo.js" ></script>
+  <body>
+    <header class="header">
+      <div class="container"><h3>Edit Todo</h3></div>
+    </header>
+    <div class="actions">
+      <div class="actions__container  actions__container--spaced">
+        <a href="/">Home Todo List</a> <span id="last-edited-todo"></span>
+      </div>
+    </div>
+    <div class="container">
+      <input class="input" type="text" id="edit-todo-text" />
+      <button class="button" id="btn-remove-todo">Remove</button>
+    </div>
+  </body>
+  <script src="scripts/moment-with-locales.min.js"></script>
+  <script src="scripts/todo-functions.js"></script>
+  <script src="scripts/edit-todo.js"></script>
 </html>
