@@ -91,7 +91,7 @@ const renderTodos = (listOfTodos, filterTodo) => {
     const pEmptyMsg = document.createElement('p')
     pEmptyMsg.textContent = 'There is no to-dos to show'
     pEmptyMsg.classList.add('empty-message')
-    dtodosEl.appendChild(pEmptyMsg)
+    todosEl.appendChild(pEmptyMsg)
   }
 
   
